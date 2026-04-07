@@ -165,26 +165,39 @@ let tipoAtual = "";
 
 function abrirModal(tipo){
     tipoAtual = tipo;
+
+    const titulo = document.getElementById("titulo");
+    titulo.innerText = "Digite o PIN - " + tipo.toUpperCase();
+
     document.getElementById("modal").classList.add("active");
 }
 
 function verificar(){
 
-    const pins = {
-        admin: "1234",
-        gestor: "5678",
-        funcionario: "0000"
+    const dados = {
+        admin: {
+            pin: "1234",
+            url: "https://moscovo5.github.io/gestao-de-empresa/"
+        },
+        gestor: {
+            pin: "5678",
+            url: "https://www.instagram.com"
+        },
+        funcionario: {
+            pin: "0000",
+            url: "https://moscovo5.github.io/pagina-dos-funcionarios-da-empresa/"
+        }
     };
 
     const input = document.getElementById("pinInput").value;
     const msg = document.getElementById("msg");
 
-    if(input === pins[tipoAtual]){
+    if(input === dados[tipoAtual].pin){
         msg.innerText = "Acesso permitido!";
         msg.className = "msg sucesso";
 
         setTimeout(()=>{
-            window.location.href = tipoAtual + ".html";
+            window.location.href = dados[tipoAtual].url;
         },1000);
 
     }else{
